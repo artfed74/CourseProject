@@ -45,7 +45,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
                 <td>
                     <form action="Delete_feedback.php" method="POST">
                         <input name="id" type="hidden" value="<?php echo $row['id'] ?>">
-                        <input type="submit" class="del_btn" name="delete_user" value="Удалить" onclick="return confirmDelete();">
+                        <input type="submit" class="del_btn" name="delete_feedback" value="Удалить" onclick="return confirmDelete();">
                     </form>
                 </td>
             </tr>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     </script>
     <script>
         function confirmDelete() {
-            return confirm("Подтвердите удаление данных пользователя?");
+            return confirm("Подтвердите удаление данных?");
         }
     </script>
 
