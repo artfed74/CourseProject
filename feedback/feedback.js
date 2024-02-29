@@ -32,12 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 
                 successMessage.style.display = 'block';
+                successMessage.style.fontSize = '20px';
+                successMessage.style.marginTop='15px';
+
 
               
                 setTimeout(function() {
                     successMessage.style.display = 'none';
                     form.reset();
-                }, 5000);
+                }, 3000);
             }
         })
         .catch(error => console.error('Error:', error));
