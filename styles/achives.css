@@ -1,0 +1,38 @@
+.form-select{
+    border:2px solid #323C8D;
+    outline: none;
+    box-shadow: none;
+    appearance: none; 
+    -webkit-appearance: none;
+     -moz-appearance: none; 
+     background-color: transparent; 
+    
+}
+.btn_sort{
+    color: white;
+    background-color: #323C8D;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    height: 40px;
+    border-radius: 5px;
+}
+.btn_sort:hover{
+    background-color: #283385;
+}
+.sort{
+    margin-top: 20px;
+
+}
+.images_cont{
+    margin-top: 35px;
+}
+.images_rows{
+    margin-top: 10px;
+}
+.image_container{
+    margin-top: 35px;
+}
+
+

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Неправильный логин или пароль!";
     } else {
         $_SESSION['admin'] = true;
-        header("Location:admin_panel.php");
+        header("Location:admin_feedback/admin_panel.php");
         exit();
     }
 }
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin_login.css">
     <title>Document</title>
 </head>
 

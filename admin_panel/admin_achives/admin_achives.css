@@ -1,0 +1,36 @@
+
+.table_feedback tr td{
+    border: 2px solid #283385;
+    font-size: 22px;
+    text-align: center;
+}
+.table_feedback th{
+    font-size: 22px;
+    text-align: center;
+}
+.del_btn{
+    color: white;
+    background-color: rgb(189, 58, 58);
+    border: none;
+    border-radius:5px;
+    transition: all 0.3s;
+    font-size: 20px;
+
+}
+.del_btn:hover{
+    background-color:rgb(196, 35, 35) ;
+}
+.reduct_btn{
+    color: white;
+    background-color: #323C8D;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    padding: 2px;
+    font-size: 20px;
+}
+.reduct_btn:hover{
+   background-color: #283385;
+}

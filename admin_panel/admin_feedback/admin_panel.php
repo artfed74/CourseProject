@@ -1,9 +1,9 @@
 <?php
-require("../DB_Connect/db_connect.php");
+require("../../DB_Connect/db_connect.php");
 session_start();
 
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-    header("Location: admin_login.php");
+    header("Location: ../admin_login.php");
     exit();
 } else {
     $stmt = $mysql->prepare("SELECT * FROM `feedback`");
@@ -19,7 +19,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin_feedback.css">
     <title>Admin Panel</title>
 </head>
 
