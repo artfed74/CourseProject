@@ -32,6 +32,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
             <th>Имя</th>
             <th>Почта</th>
             <th>Комментарий</th>
+            <th>Дата</th>
             <th></th>
         </tr>
         <?php
@@ -42,6 +43,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
                 <td><?php echo $row['name'] ?></td>
                 <td><?php echo $row['email'] ?></td>
                 <td><?php echo $row['comment'] ?></td>
+                <td><?php echo $row['date'] ?></td>
                 <td>
                     <form action="Delete_feedback.php" method="POST">
                         <input name="id" type="hidden" value="<?php echo $row['id'] ?>">

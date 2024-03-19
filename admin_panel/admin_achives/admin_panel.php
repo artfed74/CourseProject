@@ -1,7 +1,5 @@
-<?php
+<?php session_start();
 require("../../DB_Connect/db_connect.php");
-session_start();
-
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     header("Location: ../admin_login.php");
     exit();
@@ -26,7 +24,10 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
 <body>
 
     <h3 style="font-weight: 300; text-align:center">БД "Награды"</h3>
-    <table class="table_feedback" style="width: 80%; margin:0 auto; height:auto">
+    <div class="container">
+    <a href="Add_achive.php" class="add_button">Добавить награду</a>
+    </div>
+    <table class="table_feedback" style="width: 80%; margin:0 auto; height:auto;margin-top: 30px;">
         <tr>
             <th>ID</th>
             <th>Имя</th>

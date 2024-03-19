@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Мар 04 2024 г., 18:14
--- Версия сервера: 10.4.28-MariaDB
--- Версия PHP: 8.0.28
+-- Время создания: Мар 14 2024 г., 14:20
+-- Версия сервера: 10.4.32-MariaDB
+-- Версия PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `achives` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL
+  `name` varchar(100) NOT NULL,
+  `year` varchar(25) NOT NULL,
+  `type` varchar(75) NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
@@ -175,9 +175,25 @@ INSERT INTO `achives` (`id`, `name`, `year`, `type`, `image`) VALUES
 
 CREATE TABLE `feedback` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `comment` varchar(100) NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `main`
+--
+
+CREATE TABLE `main` (
+  `id` int(11) NOT NULL,
+  `id_achives` int(11) NOT NULL,
+  `id_teachers_veterans` int(11) NOT NULL,
+  `id_notable alumni` int(11) NOT NULL,
+  `id_veterans` int(11) NOT NULL,
+  `id_feedback` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -188,13 +204,13 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `notable alumni` (
   `id` int(11) NOT NULL,
-  `fistname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `patr` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `extend_image` varchar(255) NOT NULL,
+  `fistname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `patr` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `extend_image` varchar(100) NOT NULL,
   `audio interview` blob NOT NULL,
-  `biography` varchar(10000) NOT NULL
+  `biography` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -205,16 +221,16 @@ CREATE TABLE `notable alumni` (
 
 CREATE TABLE `teachers-veterans` (
   `id` int(11) NOT NULL,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `patr` varchar(255) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `patr` varchar(50) NOT NULL,
   `date_start` date NOT NULL,
   `date_end` date NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `extend_image` varchar(255) NOT NULL,
-  `position` varchar(255) NOT NULL,
-  `biography` varchar(10000) NOT NULL,
-  `image_achives` varchar(1000) NOT NULL
+  `image` varchar(100) NOT NULL,
+  `extend_image` varchar(100) NOT NULL,
+  `position` varchar(100) NOT NULL,
+  `biography` text NOT NULL,
+  `image_achives` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 -- --------------------------------------------------------
@@ -225,12 +241,12 @@ CREATE TABLE `teachers-veterans` (
 
 CREATE TABLE `veterans` (
   `id` int(11) NOT NULL,
-  `firstname` varchar(255) NOT NULL,
-  `lastname` varchar(255) NOT NULL,
-  `patr` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `extend_image` varchar(255) NOT NULL,
-  `biography` varchar(10000) NOT NULL
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `patr` varchar(50) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `extend_image` varchar(100) NOT NULL,
+  `biography` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 
 --
@@ -247,6 +263,12 @@ ALTER TABLE `achives`
 -- Индексы таблицы `feedback`
 --
 ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `main`
+--
+ALTER TABLE `main`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -275,13 +297,19 @@ ALTER TABLE `veterans`
 -- AUTO_INCREMENT для таблицы `achives`
 --
 ALTER TABLE `achives`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT для таблицы `main`
+--
+ALTER TABLE `main`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `notable alumni`

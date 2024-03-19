@@ -8,8 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if ($name == '' || $email == '' || $comment == '') {
         $error = "Вы не заполнили все поля";
     } else {
-        $stmt = $mysql->prepare("INSERT INTO  `feedback`(name,email,comment) VALUES (?,?,?)");
-        $stmt->bind_param("sss", $name, $email, $comment);
+        $date = date('Y-m-d H:i:s');
+        $stmt = $mysql->prepare("INSERT INTO  `feedback`(name,email,comment,date) VALUES (?,?,?,?)");
+        $stmt->bind_param("ssss", $name, $email, $comment, $date);
         $stmt->execute();
         $stmt->close();
     }
@@ -58,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="submit" value="Отправить">
                         <div id="successMessage" style="display: none;" class="alert alert-success" role="alert">Ваш вопрос отправлен</div>
                         <span style="color: red;"><?php echo $error ?></span>
-
                     </form>
                 </div>
             </div>

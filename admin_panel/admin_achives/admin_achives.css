@@ -34,3 +34,19 @@
 .reduct_btn:hover{
    background-color: #283385;
 }
+.add_button{
+    text-decoration: none;
+    background-color: #323C8D;
+    transition: all 0.3s;
+    color: white;
+    border: none;
+    float: center;
+    border-radius: 5px;
+    padding: 5px 5px;
+}
+.add_button:hover{
+    background-color: #283385;
+}
+.add{
+    width: 30%;
+}

@@ -1,5 +1,5 @@
 <?php
-require("../DB_Connect/db_connect.php");
+require("../../DB_Connect/db_connect.php");
 session_start();
 
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {

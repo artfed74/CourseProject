@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Неправильный логин или пароль!";
     } else {
         $_SESSION['admin'] = true;
-        header("Location:admin_feedback/admin_panel.php");
+        header("Location:admin_achives/admin_panel.php");
         exit();
     }
 }
