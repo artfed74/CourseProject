@@ -34,5 +34,25 @@
 .image_container{
     margin-top: 35px;
 }
+.types {
+    font-weight: 500;
+    color: #323C8D;
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
+.types.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.image_container {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
+.image_container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
