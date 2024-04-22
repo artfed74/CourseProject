@@ -50,3 +50,33 @@
 .add{
     width: 30%;
 }
+.navbar-nav .nav-link {
+    position: relative;
+    transition: all 0.3s;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #323C8D;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: bottom right;
+}
+
+.navbar-nav .nav-link:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.nav-link.active::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.navbar-brand{
+    margin-left: 20px;
+    font-weight: 300;
+}

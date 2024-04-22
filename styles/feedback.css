@@ -55,6 +55,10 @@ padding-right: 10px;
 .form_feedback input[type="submit"]:hover{
     background-color: #283385;
 }
+.nav-link.active::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
 
 
 

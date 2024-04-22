@@ -1,13 +1,15 @@
-.form-select{
-    border:2px solid #323C8D;
+.form-select {
+    border: 2px solid #323C8D;
     outline: none;
     box-shadow: none;
-    appearance: none; 
+    appearance: none;
     -webkit-appearance: none;
-     -moz-appearance: none; 
-     background-color: transparent; 
-    
+    -moz-appearance: none;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 5px;
 }
+
 .btn_sort{
     color: white;
     background-color: #323C8D;
@@ -55,4 +57,45 @@
 .image_container.show {
     opacity: 1;
     transform: translateY(0);
+}
+.navbar-brand{
+    margin-left: 20px;
+    font-weight: 300;
+}
+.navbar-nav .nav-link {
+    position: relative;
+    transition: all 0.3s;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #323C8D;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: bottom right;
+}
+
+.navbar-nav .nav-link:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.nav-link.active::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.image_container img {
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* пример тени */
+    border: 1px solid #ccc; /* пример рамки */
+    border-radius: 5px; /* скругленные углы */
+    transition: transform 0.3s ease; /* плавное изменение при увеличении */
+}
+
+.image_container img:hover {
+    transform: scale(1.1); /* увеличение изображения при наведении */
 }

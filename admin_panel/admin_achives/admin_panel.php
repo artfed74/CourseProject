@@ -22,7 +22,47 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
 </head>
 
 <body>
-
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <img src="../../assets/logo.png" style="width:30px;height:30px"> <a class="navbar-brand" href="#">Панель администратора</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../pages/achives.php">Награды</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../pages/notable_alumni.php">Выдающиеся выпускники</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Ветераны труда</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../pages/veterans.php">Участники войны</a>
+                </li>
+            </ul>
+            
+            <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) { ?>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../admin_feedback/admin_panel.php">Обратная связь</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Управление наградами</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger" href="#" onclick="confirmLogout();">Выйти</a>
+                    </li>
+                </ul>
+            <?php } ?>
+        </div>
+    </div>
+</nav>
     <h3 style="font-weight: 300; text-align:center; color:#323C8D;">БД "Награды"</h3>
     <div class="container">
         <a href="Add_achive.php" class="add_button">Добавить награду</a>
@@ -61,6 +101,24 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
     <script>
+        function confirmLogout() {
+    const confirmLogout = confirm("Вы уверены, что хотите выйти?");
+
+    if (confirmLogout) {
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = '../logout.php'; // Перенаправление на logout.php
+
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'confirm_logout';
+        input.value = 'true';
+
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
         function confirmDelete() {
             return confirm("Подтвердите удаление данных?");
         }

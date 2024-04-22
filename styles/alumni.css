@@ -1,0 +1,138 @@
+img{
+    width: 316px;
+    height: 450px;
+}
+.btn-info{
+    color: white;
+    background-color: #323C8D;
+    transition: all 0.3s;
+    border: none;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.btn-info:hover{
+    background-color: #283385;
+    color: white;
+}
+.btn_reduct {
+    color: white;
+    background-color: #6cd670;
+    transition: all 0.3s;
+    border: none;
+    text-decoration: none;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.btn_reduct:hover {
+    background-color: #51c055;
+}
+.btn_delete{
+    color: white;
+    background-color: rgb(189, 58, 58);
+    transition: all 0.3s;
+    border: none;
+    text-decoration: none;
+    width: 150px;
+    height: 40px;
+    font-size: 16px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+.btn_delete:hover{
+    background-color: rgb(177, 44, 44);
+}
+
+.card-title{
+    font-size: 20px;
+    font-weight: 300;
+    text-align: center;
+}
+.row{
+    margin-top: 10px;
+}
+.col-3{
+    margin-top: 10px;
+    
+}
+.navbar-brand{
+    margin-left: 20px;
+    font-weight: 300;
+}
+.card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    visibility: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
+}
+.navbar-nav .nav-link {
+    position: relative;
+    transition: all 0.3s;
+}
+
+.navbar-nav .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #323C8D;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: bottom right;
+}
+
+.navbar-nav .nav-link:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.nav-link.active::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.new_alumni {
+    text-decoration: none;
+    width: 200px;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 15px;
+    background-color: #283385;
+    color: white;
+}
+
+/* Если нужна прозрачность для модалки  */
+/* .modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+} */ 
+.modal-title {
+    font-size: 24px;
+    color: #323C8D;
+    font-weight: bold;
+}
+.modal-content {
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+/* Стили для изображений */
+img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
