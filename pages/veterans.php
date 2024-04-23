@@ -75,7 +75,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             foreach ($rows as $row) { ?>
                 <div class="col-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="card" style="width: 18rem;" data-alumni-id="<?php echo $row['id']; ?>">
-                        <img src="../assets/<?php echo $row['image'] ?>" class="card-img-top" alt="...">
+                        <img src="../assets/<?php echo $row['image'] ?>" class="card-img-top" alt="Фотография отсутствует">
                         <div class="card-body">
                             <h6 class="card-title"><?php echo $row['firstname'] ?><br><?php echo $row['lastname'] ?><br><?php echo $row['patr'] ?></h6>
                             <center>

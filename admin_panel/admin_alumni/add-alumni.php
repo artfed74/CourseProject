@@ -11,17 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lastname = $_POST['lastname'];
     $patr = $_POST['patr'];
     $biography=$_POST['biography'];
-
     $current_path = $_FILES['myfile']['tmp_name'];
     $filename = $_FILES['myfile']['name'];
-    $arr = explode('.', $filename);
-    $ext = end($arr);
-    $filenameWithExt = time() . '.' . $ext;
-    $new_path = __DIR__ . '/../../assets/Alumni' . '/' . $filename;
+    echo $filename;
+    $new_path = dirname(__FILE__) . '/../../assets/Alumni' . '/' . $filename;
     move_uploaded_file($current_path, $new_path);
     $image_path = 'Alumni'.'/' . $filename;
     $stmt = $mysql->prepare("INSERT INTO `notable alumni`(firstname,lastname,patr,biography,image) VALUES(?,?,?,?,?)");
-    $stmt->bind_param("sssss", $firstname, $lastname, $patr,$biography, $filenameWithExt);
+    $stmt->bind_param("sssss", $firstname, $lastname, $patr,$biography, $image_path);
     $stmt->execute();
     header("Location:../../pages/notable_alumni.php");
 }
@@ -43,7 +40,7 @@ $query = $selectStmt->get_result();
 <body>
     <div class="container">
         <h2 style="text-align:center;font-weight:300">Добавление выпускника</h2>
-        <form class="form-login" method="POST" action="#">
+        <form class="form-login" method="POST" action="#" enctype="multipart/form-data">
             <label>Фамилия</label>
             <input type="text" name="firstname">
             <label>Имя</label>
