@@ -13,7 +13,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $biography=$_POST['biography'];
     $current_path = $_FILES['myfile']['tmp_name'];
     $filename = $_FILES['myfile']['name'];
-    echo $filename;
     $new_path = dirname(__FILE__) . '/../../assets/Alumni' . '/' . $filename;
     move_uploaded_file($current_path, $new_path);
     $image_path = 'Alumni'.'/' . $filename;
