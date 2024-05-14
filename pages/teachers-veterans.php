@@ -1,7 +1,7 @@
 <?php 
 require("../DB_Connect/db_connect.php");
 session_start();
-$stmt = $mysql->prepare("SELECT * FROM `veterans`");
+$stmt = $mysql->prepare("SELECT * FROM `teachers-veterans`");
 $stmt->execute();
 $result = $stmt->get_result();
 $rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -12,8 +12,9 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    <link rel="stylesheet" href="../styles/veterans.css">
-    <title>Участники войны</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    
+    <link rel="stylesheet" href="../styles/teachers-veterans.css">
+    <title>Ветераны труда</title>
 </head>
 
 <body>
@@ -35,10 +36,10 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     <a class="nav-link" href="notable_alumni.php">Выдающиеся выпускники</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="teachers-veterans.php">Ветераны труда</a>
+                    <a class="nav-link active" href="#">Ветераны труда</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="veterans.php">Участники войны</a>
+                    <a class="nav-link" href="veterans.php">Участники войны</a>
                 </li>
             </ul>
             
@@ -60,12 +61,12 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 </nav>
     <div class="container">
         <div class="row">
-            <h1 style='font-weight:500; color:#323C8D;'>Участники войны</h1>
+            <h1 style='font-weight:500; color:#323C8D;'>Ветераны труда</h1>
             <p>
 Фронтендер, добавь текст
             </p>
             <?php if(isset($_SESSION['admin']) && $_SESSION['admin']==true) { ?>
-                <a href="../admin_panel/admin_veterans/add_veterans.php" class="new_alumni">Новый участник войны</a>
+                <a href="../admin_panel/admin_teachers_veterans/add_teacher.php" class="new_alumni">Новый ветеран труда</a>
                 <?php }?>
         </div>
     </div>
@@ -75,18 +76,18 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             foreach ($rows as $row) { ?>
                 <div class="col-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="card" style="width: 18rem;" data-alumni-id="<?php echo $row['id']; ?>">
-                        <img src="../assets/<?php echo $row['image'] ?>" class="card-img-top" alt="Фотография отсутствует">
+                        <img src="../assets/<?php echo $row['image'] ?>" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h6 class="card-title"><?php echo $row['firstname'] ?><br><?php echo $row['lastname'] ?><br><?php echo $row['patr'] ?></h6>
                             <center>
                             <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#myModal_<?php echo $row['id']; ?>">Подробнее</button>
                             </center>
                             <?php if(isset($_SESSION['admin']) && $_SESSION['admin']==true) {?>
-                                <center><button class="btn_reduct" onclick="goreduct(this)" data-alumni-id="<?php echo $row['id']; ?>">Редактировать</button></center>
+                                <center><button class="btn_reduct" onclick="goreduct(this)" data-teacher-id="<?php echo $row['id']; ?>">Редактировать</button></center>
                                 <center>
-                                <form action="../admin_panel/admin_veterans/delete_veterans.php" method="POST">
+                                <form action="../admin_panel/admin_teachers_veterans/delete-teacher.php" method="POST">
                                     <input name="id" type="hidden" value="<?php echo $row['id'] ?>">
-                                    <input type="submit" class="btn_delete" name="delete_veterans" value="Удалить" onclick="return confirmDelete();">
+                                    <input type="submit" class="btn_delete" name="delete_alumni" value="Удалить" onclick="return confirmDelete();">
                                 </form>
                                 </center>
                                 <?php }?>
@@ -103,17 +104,24 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Информация о выпуснике</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Информация о ветеране труда</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                     <img src="../assets/<?php echo $row['image'] ?>" class="card-img-top" alt="...">
                     <h6 class="card-title"><?php echo $row['firstname'] ?> <?php echo $row['lastname'] ?> <?php echo $row['patr'] ?></h6>
-                    <!-- <audio controls>
-                    <source src="../assets/mp3/1.mp3" type="audio/mpeg">
-        
-                    </audio> -->
-                    <p class='text-information'><?php echo $row['biography'] ?></p>
+                    <h6 class='years'>
+    <?php 
+        $date_start = date_create($row['date_start']);
+        $date_end = date_create($row['date_end']);
+        echo "Годы работы: " . date_format($date_start, 'Y') . ' - ' . date_format($date_end, 'Y'); 
+    ?>
+</h6>
+<h6 class='years'>Должность: <?php echo $row['position'] ?></h6>
+
+                    <p class="text-information"><?php echo $row['biography'] ?></p>
+                    <center><h6 style='font-weight:300;font-size:24px'>Награды</h6></center>
+                    <p class="text-information"><?php echo $row['text_achives'] ?></p>
                     </div>
                 </div>
             </div>
@@ -143,8 +151,8 @@ function confirmLogout() {
     }
 }
 function goreduct(btn) {
-    const alumniId = btn.getAttribute('data-alumni-id');
-    window.location.href = `../admin_panel/admin_veterans/reduct_veterans.php?id=${alumniId}`;
+    const alumniId = btn.getAttribute('data-teacher-id');
+    window.location.href = `../admin_panel/admin_teachers_veterans/reduct-teacher.php?id=${alumniId}`;
 }
 
 // Добавляем обработчики событий после загрузки DOM
@@ -173,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener('scroll', checkCardVisibility);
 });
 function confirmDelete() {
-            return confirm("Подтвердите удаление участника войны?");
+            return confirm("Подтвердите удаление ветерана труда?");
         }
 </script>
 </body>

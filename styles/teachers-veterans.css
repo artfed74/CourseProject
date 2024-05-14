@@ -135,7 +135,12 @@ img {
     max-width: 100%;
     border-radius: 10px;
 }
-
+.years{
+    text-align: center;
+    font-weight: 300;
+    font-size: 19px;
+    margin-top: 15px;
+}
 .text-information{
     margin-top: 15px;
     font-size: 19px;

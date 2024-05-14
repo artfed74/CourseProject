@@ -40,7 +40,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
                     <a class="nav-link" href="../../pages/notable_alumni.php">Выдающиеся выпускники</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ветераны труда</a>
+                    <a class="nav-link" href="../../pages/teachers-veterans.php">Ветераны труда</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../pages/veterans.php">Участники войны</a>

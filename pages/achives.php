@@ -17,7 +17,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/achives.css">
-    <title>Document</title>
+    <title>Награды</title>
 </head>
 
 <body>
@@ -39,7 +39,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
           <a class="nav-link" href="notable_alumni.php">Выдающиеся выпускники</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Ветераны труда</a>
+          <a class="nav-link" href="teachers-veterans.php">Ветераны труда</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="veterans.php">Участники войны</a>
@@ -188,5 +188,4 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
         });
     </script>
 </body>
-
 </html>

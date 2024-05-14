@@ -10,17 +10,18 @@
         $name = $_POST['name'];
         $email = $_POST['email'];
         $comment = $_POST['comment'];
+        $body = "Ваше письмо было отправлено администратору сайта. Ожидайте ответа в ближайшее время:)";
+        var_dump(send_mail($settings['mail_settings_prod'], [$email], 'Письмо с сайта', $body));
         if ($name == '' || $email == '' || $comment == '') {
             $error = "Вы не заполнили все поля";
         } else {
-            // $date = date('Y-m-d H:i:s');
-            // $stmt = $mysql->prepare("INSERT INTO  `feedback`(name,email,comment,date) VALUES (?,?,?,?)");
-            // $stmt->bind_param("ssss", $name, $email, $comment, $date);
-            // $stmt->execute();
-            // $stmt->close();
+            $date = date('Y-m-d H:i:s');
+            $stmt = $mysql->prepare("INSERT INTO  `feedback`(name,email,comment,date) VALUES (?,?,?,?)");
+            $stmt->bind_param("ssss", $name, $email, $comment, $date);
+            $stmt->execute();
+            $stmt->close();
 
-            $body = "Ваше письмо было отправлено администратору сайта. Ожидайте ответа в ближайшее время:)";
-            var_dump(send_mail($settings['mail_settings_prod'], [$email], 'Письмо с сайта', $body));
+           
         }
     }
 
