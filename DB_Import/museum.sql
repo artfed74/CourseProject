@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 14 2024 г., 12:41
+-- Время создания: Май 14 2024 г., 14:28
 -- Версия сервера: 10.4.28-MariaDB
 -- Версия PHP: 8.0.28
 
@@ -186,9 +186,7 @@ CREATE TABLE `feedback` (
 --
 
 INSERT INTO `feedback` (`id`, `name`, `email`, `comment`, `date`) VALUES
-(40, 'Артем', 'artemfedotovskih69@gmail.com', 'Как выпить?', '2024-05-14 12:31:44'),
-(41, 'Сосун', 'artemfedotovskih69@gmail.com', 'aasd', '2024-05-14 12:33:52'),
-(42, 'sasd', 'fedotovskihartem@gmail.com', 'asd', '2024-05-14 12:34:34');
+(45, 'Cocун', 'fedotovskihartem@gmail.com', 'asdasdasd', '2024-05-14 14:27:55');
 
 -- --------------------------------------------------------
 
@@ -352,7 +350,7 @@ ALTER TABLE `achives`
 -- AUTO_INCREMENT для таблицы `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT для таблицы `main`
