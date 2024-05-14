@@ -21,52 +21,52 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <img src="../assets/logo.png" style="width:30px;height:30px"> <a class="navbar-brand" href="#">Музей МПК</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Главная</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="achives.php">Награды</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="notable_alumni.php">Выдающиеся выпускники</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="teachers-veterans.php">Ветераны труда</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="veterans.php">Участники войны</a>
-        </li>
-      </ul>
-      <?php if(isset($_SESSION['admin']) && $_SESSION['admin'] == true) { ?>
-                <ul class="navbar-nav ms-auto">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="../assets/logo.png" style="width:30px;height:30px"> <a class="navbar-brand" href="#">Музей МПК</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin_panel/admin_feedback/admin_panel.php">Обратная связь</a>
+                        <a class="nav-link" aria-current="page" href="../index.php">Главная</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin_panel/admin_achives/admin_panel.php">Управление наградами</a>
+                        <a class="nav-link active" href="achives.php">Награды</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-danger" href="#" onclick="confirmLogout();">Выйти</a>
+                        <a class="nav-link" href="notable_alumni.php">Выдающиеся выпускники</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="teachers-veterans.php">Ветераны труда</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="veterans.php">Участники войны</a>
                     </li>
                 </ul>
-            <?php } ?>
-    </div>
-  </div>
-</nav>
+                <?php if (isset($_SESSION['admin']) && $_SESSION['admin'] == true) { ?>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../admin_panel/admin_feedback/admin_panel.php">Обратная связь</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../admin_panel/admin_achives/admin_panel.php">Управление наградами</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-danger" href="#" onclick="confirmLogout();">Выйти</a>
+                        </li>
+                    </ul>
+                <?php } ?>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="row">
             <h1 style='font-weight:500; color:#323C8D;'>Награды</h1>
             <p>
-            Фронтендер, добавь текст       
-         </div>
+                Фронтендер, добавь текст
+        </div>
     </div>
     <div class="container sort">
         <div class="row">
@@ -111,7 +111,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                     $prevType = $row['type'];
                 }
             ?>
-            
+
                 <div class="col-4 image_container"><img type="<?php echo $row['type'] ?>" src="../assets/<?php echo $row['image'] ?>" year="<?php echo $row['year'] ?>" onclick="enlargeImg()"></div>
             <?php
             }
@@ -122,7 +122,6 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
-       
         document.querySelector('.btn_sort').addEventListener('click', function() {
             var type = document.getElementById('typeSelect').value;
             var year = document.getElementById('yearSelect').value;
@@ -130,24 +129,24 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             var images = document.querySelectorAll('.col-4');
 
             images.forEach(function(image) {
-    var imageType = image.querySelector('img').getAttribute('type');
-    var isVisibleType = type === '' || imageType === type;
-    var isVisibleYear = year === '' || image.querySelector('img').getAttribute('year') === year;
+                var imageType = image.querySelector('img').getAttribute('type');
+                var isVisibleType = type === '' || imageType === type;
+                var isVisibleYear = year === '' || image.querySelector('img').getAttribute('year') === year;
 
-    if (isVisibleType && isVisibleYear) {
-        image.style.display = 'block';
-    } else {
-        image.style.display = 'none';
-    }
-    // Версия 2, если нужна другая сортировка
-    // var types = document.querySelectorAll('.types');
-    // types.forEach(type => {
-    //     if (type.innerText === type) {
-    //         type.style.display = 'block';
-    //     } else {
-    //         type.style.display = 'none';
-    //     }
-        });
+                if (isVisibleType && isVisibleYear) {
+                    image.style.display = 'block';
+                } else {
+                    image.style.display = 'none';
+                }
+                // Версия 2, если нужна другая сортировка
+                // var types = document.querySelectorAll('.types');
+                // types.forEach(type => {
+                //     if (type.innerText === type) {
+                //         type.style.display = 'block';
+                //     } else {
+                //         type.style.display = 'none';
+                //     }
+            });
         });
         document.addEventListener("DOMContentLoaded", function() {
             const types = document.querySelectorAll('.types');
@@ -188,4 +187,5 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
         });
     </script>
 </body>
+
 </html>
