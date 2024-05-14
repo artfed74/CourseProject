@@ -10,8 +10,11 @@
         $name = $_POST['name'];
         $email = $_POST['email'];
         $comment = $_POST['comment'];
-        $body = "Ваше письмо было отправлено администратору сайта. Ожидайте ответа в ближайшее время:)";
-        var_dump(send_mail($settings['mail_settings_prod'], [$email], 'Письмо с сайта', $body));
+        $attachments = [
+            __DIR__ . '/files/test.pdf'
+        ];
+        $body = "<h1>Дорогой(ая) $name</h1> <h2>Ваше письмо было отправлено администратору сайта. Ожидайте ответа в ближайшее время:)</h2>";
+        var_dump(send_mail($settings['mail_settings_prod'], [$email], 'Письмо с сайта', $body, $attachments));
         if ($name == '' || $email == '' || $comment == '') {
             $error = "Вы не заполнили все поля";
         } else {
@@ -20,8 +23,6 @@
             $stmt->bind_param("ssss", $name, $email, $comment, $date);
             $stmt->execute();
             $stmt->close();
-
-           
         }
     }
 
