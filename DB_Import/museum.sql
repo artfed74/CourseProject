@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Май 14 2024 г., 14:28
+-- Время создания: Май 14 2024 г., 14:34
 -- Версия сервера: 10.4.28-MariaDB
 -- Версия PHP: 8.0.28
 
@@ -180,13 +180,6 @@ CREATE TABLE `feedback` (
   `comment` varchar(100) NOT NULL,
   `date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
---
--- Дамп данных таблицы `feedback`
---
-
-INSERT INTO `feedback` (`id`, `name`, `email`, `comment`, `date`) VALUES
-(45, 'Cocун', 'fedotovskihartem@gmail.com', 'asdasdasd', '2024-05-14 14:27:55');
 
 -- --------------------------------------------------------
 
