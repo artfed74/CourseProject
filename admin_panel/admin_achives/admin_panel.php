@@ -1,15 +1,39 @@
-<?php session_start();
+<?php
+session_start();
 require("../../DB_Connect/db_connect.php");
+
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     header("Location: ../admin_login.php");
     exit();
-} else {
-    $stmt = $mysql->prepare("SELECT * FROM `achives`");
-    $stmt->execute();
-    $result = $stmt->get_result();
 }
 
+$type = isset($_GET['type']) ? $_GET['type'] : '';
+$year = isset($_GET['year']) ? $_GET['year'] : '';
+
+$query = "SELECT * FROM `achives` WHERE 1";
+$params = [];
+
+if ($type) {
+    $query .= " AND `type` = ?";
+    $params[] = $type;
+}
+
+if ($year) {
+    $query .= " AND `year` = ?";
+    $params[] = $year;
+}
+
+$stmt = $mysql->prepare($query);
+
+if (!empty($params)) {
+    $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
+$rows = $result->fetch_all(MYSQLI_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +43,13 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="admin_achives.css">
     <title>Admin Panel</title>
+    <style>
+        .send_filt{
+            background-color:#283385;
+            color:white;
+            border-radius:5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -67,53 +98,68 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     <div class="container">
         <a href="Add_achive.php" class="add_button">Добавить награду</a>
     </div>
+
+    <div class="container mt-4">
+        <div class="row">
+       
+        <form id="myForm">
+    <input type="text" name="type" id="typeInput" placeholder="Тип">
+    <input type="text" name="year" id="yearInput" placeholder="Год">
+    <button type="submit" class='send_filt'>Отправить</button>
+</form>
+<div id="результаты"></div>
+            
+        </div>
+    </div>
+
     <table class="table_feedback" style="width: 80%; margin:0 auto; height:auto;margin-top: 30px;">
-        <tr>
-            <th>ID</th>
-            <th>Имя</th>
-            <th>Год</th>
-            <th>Тип</th>
-            <th>Изображение</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <?php
-        while ($row = $result->fetch_assoc()) {
-        ?>
+        <thead>
             <tr>
-                <td><?php echo $row['id'] ?></td>
-                <td><?php echo $row['name'] ?></td>
-                <td><?php echo $row['year'] ?></td>
-                <td><?php echo $row['type'] ?></td>
-                <td><?php echo $row['image'] ?></td>
-                <td>
-                    <form action="Delete_achives.php" method="POST">
-                        <input name="id" type="hidden" value="<?php echo $row['id'] ?>">
-                        <input type="submit" class="del_btn" name="delete_feedback" value="Удалить" onclick="return confirmDelete();">
-                    </form>
-                </td>
-                <td><a href="Reduct_achive.php?id=<?php echo $row['id']; ?>" class="reduct_btn">Редактировать</a></td>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Год</th>
+                <th>Тип</th>
+                <th>Изображение</th>
+                <th></th>
+                <th></th>
             </tr>
-        <?php
-        }
-        ?>
+        </thead>
+        <tbody id="achivesTableBody">
+            <?php
+            foreach ($rows as $row) {
+            ?>
+                <tr>
+                    <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $row['name'] ?></td>
+                    <td><?php echo $row['year'] ?></td>
+                    <td><?php echo $row['type'] ?></td>
+                    <td><?php echo $row['image'] ?></td>
+                    <td>
+                        <form action="Delete_achives.php" method="POST">
+                            <input name="id" type="hidden" value="<?php echo $row['id'] ?>">
+                            <input type="submit" class="del_btn" name="delete_feedback" value="Удалить" onclick="return confirmDelete();">
+                        </form>
+                    </td>
+                    <td><a href="Reduct_achive.php?id=<?php echo $row['id']; ?>" class="reduct_btn">Редактировать</a></td>
+                </tr>
+            <?php
+            }
+            ?>
+        </tbody>
     </table>
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         function confirmLogout() {
             const confirmLogout = confirm("Вы уверены, что хотите выйти?");
-
             if (confirmLogout) {
                 const form = document.createElement('form');
                 form.method = 'post';
-                form.action = '../logout.php'; // Перенаправление на logout.php
-
+                form.action = '../logout.php';
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'confirm_logout';
                 input.value = 'true';
-
                 form.appendChild(input);
                 document.body.appendChild(form);
                 form.submit();
@@ -123,6 +169,41 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
         function confirmDelete() {
             return confirm("Подтвердите удаление данных?");
         }
+
+        function applyFilters() {
+    const type = document.getElementById('typeSelect').value;
+    const year = document.getElementById('yearSelect').value;
+    
+    fetch(`/admin_achives.php?type=${type}&year=${year}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('achivesTableBody').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+// Получаем форму
+const form = document.querySelector('форма');
+
+// Обработчик события на отправку формы
+form.addEventListener('submit', function(event) {
+    // Отменяем стандартное действие формы (перезагрузку страницы)
+    event.preventDefault();
+    
+    // Получаем значения полей формы
+    const type = encodeURIComponent(form.querySelector('название_поля_тип').value);
+    const year = encodeURIComponent(form.querySelector('название_поля_год').value);
+
+    // Отправляем запрос fetch на тот же скрипт с указанными параметрами
+    fetch(`admin_achives.php?type=${type}&year=${year}`)
+        .then(response => response.text())
+        .then(data => {
+            // Обновляем DOM с полученными данными, например, вставляем их на страницу
+            document.querySelector('результаты').innerHTML = data;
+        })
+        .catch(error => console.error('Ошибка при отправке запроса:', error));
+});
     </script>
 
 </body>
